@@ -1,0 +1,44 @@
+.container {
+    background-color: #75cbb2; /* Аквамарин */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 300px; /* Ширина контейнера */
+    margin: 0 auto; /* Центрирование по горизонтали */
+}
+
+h2 {
+    color: #084041; /* Темный аквамарин */
+    margin-bottom: 15px;
+    text-align: center; /* Центрирование текста заголовка */
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background-color: #7FFFD4; /* Аквамарин */
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    border: 2px solid #00CED1; /* Обводка темным аквамарином */
+}
+
+.btn {
+    background-color: #00CED1; /* Темный аквамарин */
+    color: #7FFFD4; /* Аквамарин */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block; /* Занимает всю ширину */
+    margin: 0 auto; /* Центрирование по горизонтали */
+}
+
+.btn:hover {
+    background-color: #7FFFD4; /* Аквамарин */
+    color: #00CED1; /* Темный аквамарин */
+}
