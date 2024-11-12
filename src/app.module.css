@@ -42,3 +42,28 @@ li {
     background-color: #7FFFD4; /* Аквамарин */
     color: #00CED1; /* Темный аквамарин */
 }
+.loader {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 10px solid transparent;
+    border-top-color: #7FFFD4; /* Аквамарин */
+    border-bottom-color: #00CED1; /* Темный аквамарин */
+    animation: spin 1.2s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.wrong{
+    color: brown;
+    text-align: center;
+    margin: 20px 0;
+}
