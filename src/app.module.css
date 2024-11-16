@@ -1,16 +1,16 @@
 .container {
-    background-color: #75cbb2; /* Аквамарин */
+    background-color: rgba(56, 255, 7, 0.34);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    width: 300px; /* Ширина контейнера */
-    margin: 0 auto; /* Центрирование по горизонтали */
+    width: 600px;
+    margin: 0 auto;
 }
 
 h2 {
-    color: #084041; /* Темный аквамарин */
+    color: #084041;
     margin-bottom: 15px;
-    text-align: center; /* Центрирование текста заголовка */
+    text-align: center;
 }
 
 ul {
@@ -19,36 +19,43 @@ ul {
 }
 
 li {
-    background-color: #7FFFD4; /* Аквамарин */
+    background-color: #7FFFD4;
     padding: 10px;
     margin-bottom: 5px;
     border-radius: 5px;
-    border: 2px solid #00CED1; /* Обводка темным аквамарином */
+    border: 2px solid #00CED1;
 }
 
 .btn {
-    background-color: #00CED1; /* Темный аквамарин */
-    color: #7FFFD4; /* Аквамарин */
+    background-color: #00CED1;
+    color: #7FFFD4;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    display: block; /* Занимает всю ширину */
-    margin: 0 auto; /* Центрирование по горизонтали */
+    margin-bottom: 5px;
+    margin-right: 50px;
+}
+.btn:disabled {
+    background-color: #d3d3d3;
+    color: #999;
+    cursor: not-allowed;
+    border: 1px solid #ccc;
 }
 
 .btn:hover {
-    background-color: #7FFFD4; /* Аквамарин */
-    color: #00CED1; /* Темный аквамарин */
+    background-color: #7FFFD4;
+    color: #00CED1;
 }
+
 .loader {
     width: 80px;
     height: 80px;
     border-radius: 50%;
     border: 10px solid transparent;
-    border-top-color: #7FFFD4; /* Аквамарин */
-    border-bottom-color: #00CED1; /* Темный аквамарин */
+    border-top-color: #7FFFD4;
+    border-bottom-color: #00CED1;
     animation: spin 1.2s linear infinite;
     margin: 20px auto;
 }
@@ -62,8 +69,38 @@ li {
     }
 }
 
-.wrong{
+.wrong {
     color: brown;
     text-align: center;
     margin: 20px 0;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.searchInput {
+    width: 30%;
+    padding: 10px;
+    border: 1px solid #00CED1;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        margin: 0 auto;
+    }
+    .flex {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    .searchInput {
+        width: 100%;
+    }
 }

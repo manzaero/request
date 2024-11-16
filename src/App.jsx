@@ -1,54 +1,61 @@
 import styles from './app.module.css'
-import {useEffect, useState} from "react";
+import { useState } from "react";
+import {
+    useRequestAddTodo,
+    useRequestGetTodos,
+    useRequestDeleteTodo,
+    useRequestUpdateTodo,
+    useRequestSearchTitle
+} from "./hooks/index.js";
 
 
-const urlTodos = `http://localhost:3000/todos/`
+const urlTodos = `http://localhost:3000/todos`
 
 export const App = function () {
+    const [refresh, setRefresh] = useState(false)
     const [todos, setTodos] = useState([])
-    const [loading, setLoading] = useState(true)
 
-    useEffect(() => {
-        fetch(urlTodos)
-            .then((todos) => todos.json())
-            .then(todo => {
-                setTodos(todo)
-                console.log(todo)
-            })
-            .finally(() => {
-                setLoading(false)
-            })
-    }, [])
-
-    const addTodo = () => {
-        fetch(urlTodos, {
-            method: 'POST',
-            headers: {'Content-type': 'application/json'},
-            body: JSON.stringify({
-                "title": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type sp",
-                "completed": false
-            })
-        })
-            .then(todo => todo.json())
-            .then(todo => {
-                console.log(todo)
-            })
-    }
+    const {searchHandler, filteredAndSorted, searchTitle, sortState, sortTodos} = useRequestSearchTitle( todos )
+    const {addTodo} = useRequestAddTodo(urlTodos, setRefresh, refresh)
+    const { loading} = useRequestGetTodos(todos, setTodos, urlTodos, refresh);
+    const { deleteTodo } = useRequestDeleteTodo( urlTodos, setRefresh, refresh);
+    const {updateTodos} = useRequestUpdateTodo(urlTodos, setRefresh, refresh);
 
     return (<>
         <div className={styles.container}>
             <h2>List todos</h2>
-            {loading ? <div className={styles.loader}></div> : todos.length === 0 ?
-                <div className={styles.wrong}>Todos not found</div>
-                : <ul>
-                    {todos.map((todo) => (
+            <input type="text"
+                   className={styles.searchInput}
+                   value={searchTitle}
+                   onChange={searchHandler}
+            />
+            {loading ? <div className={styles.loader}></div> : filteredAndSorted.length === 0 ?
+                <div className={styles.wrong}>Todos not found</div> : <ul>
+                    {filteredAndSorted.map((todo) => (<div key={todo.id} className={styles.flex}>
                         <li key={todo.id}>{todo.title}</li>
-                    ))}
+                        <button
+                            className={styles.btn}
+                            onClick={() => updateTodos(todo.id)}
+                        >Update
+                        </button>
+                        <button
+                            className={styles.btn}
+                            onClick={() => deleteTodo(todo.id)}
+                        >Delete
+                        </button>
+                    </div>))}
                 </ul>}
             <button
                 className={styles.btn}
                 onClick={addTodo}
-            >Add</button>
+            >Add
+            </button>
+            <button
+                className={styles.btn}
+                onClick={sortTodos}
+                disabled={todos.length === 0}
+            >{!sortState ? 'Sort' : 'Unsorted'}
+            </button>
         </div>
     </>)
 }
