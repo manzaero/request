@@ -26,7 +26,8 @@ export const useRequestSearchTitle = ( todos ) => {
     }
 
     const sortTodos = () => {
-        setSortState(!sortState);
+        setSortState(sortState => !sortState);
+        console.log(sortState)
     }
 
     const getSortedTodos = (todosToSort) => {
@@ -42,8 +43,8 @@ export const useRequestSearchTitle = ( todos ) => {
 
     return {
         searchHandler,
-        resultFoundTodos,
         filteredAndSorted,
-        sortTodos
+        sortTodos,
+        sortState
     }
 }

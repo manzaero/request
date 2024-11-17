@@ -11,6 +11,9 @@ export const useRequestGetTodos = (todos, setTodos, urlTodos, refresh) => {
                 setTodos(todo)
                 console.log(todo)
             })
+            .catch(err => {
+                console.error('Error:', err)
+            })
             .finally(() => {
                 setLoading(false)
             })

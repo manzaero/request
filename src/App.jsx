@@ -12,11 +12,12 @@ import {
 const urlTodos = `http://localhost:3000/todos`
 
 export const App = function () {
+
     const [refresh, setRefresh] = useState(false)
     const [todos, setTodos] = useState([])
 
     const {searchHandler, filteredAndSorted, searchTitle, sortState, sortTodos} = useRequestSearchTitle( todos )
-    const {addTodo} = useRequestAddTodo(urlTodos, setRefresh, refresh)
+    const {addTodo, newTodo, setTodo} = useRequestAddTodo(urlTodos, setRefresh, refresh)
     const { loading} = useRequestGetTodos(todos, setTodos, urlTodos, refresh);
     const { deleteTodo } = useRequestDeleteTodo( urlTodos, setRefresh, refresh);
     const {updateTodos} = useRequestUpdateTodo(urlTodos, setRefresh, refresh);
@@ -25,9 +26,16 @@ export const App = function () {
         <div className={styles.container}>
             <h2>List todos</h2>
             <input type="text"
+                   placeholder="Search..."
                    className={styles.searchInput}
                    value={searchTitle}
                    onChange={searchHandler}
+            />
+            <input type="text"
+                   className={styles.addTodo}
+                   placeholder="Add Todo"
+                    value={newTodo}
+                   onChange={setTodo}
             />
             {loading ? <div className={styles.loader}></div> : filteredAndSorted.length === 0 ?
                 <div className={styles.wrong}>Todos not found</div> : <ul>
@@ -48,6 +56,7 @@ export const App = function () {
             <button
                 className={styles.btn}
                 onClick={addTodo}
+                disabled={!newTodo}
             >Add
             </button>
             <button

@@ -11,6 +11,9 @@ export const useRequestDeleteTodo = (urlTodos, setRefresh, refresh) => {
                 console.log(todo)
                 setRefresh(!refresh);
             })
+            .catch(err => {
+                console.error('Error:', err)
+            })
     }
     return {
         deleteTodo
