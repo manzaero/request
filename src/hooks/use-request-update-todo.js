@@ -3,7 +3,7 @@ export const useRequestUpdateTodo = (urlTodos, setRefresh, refresh) => {
     const updateTodos = (id) => {
         fetch(`${urlTodos}/${id}`, {
             method: 'PUT', headers: {'Content-type': 'application/json'}, body: JSON.stringify({
-                "title": "Lorem Ipsum", "completed": true
+                "title": "updated"
             })
         })
             .then(todo => todo.json())
