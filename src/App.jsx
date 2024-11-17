@@ -43,7 +43,7 @@ export const App = function () {
                         <li key={id}>{title}</li>
                         <button
                             className={styles.btn}
-                            onClick={() => updateTodos(id)}
+                            onClick={() => updateTodos(todo.id)}
                         >Update
                         </button>
                         <button
