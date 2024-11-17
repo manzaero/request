@@ -1,11 +1,11 @@
 import styles from './app.module.css'
-import { useState } from "react";
+import {useState} from "react";
 import {
     useRequestAddTodo,
-    useRequestGetTodos,
     useRequestDeleteTodo,
-    useRequestUpdateTodo,
-    useRequestSearchTitle
+    useRequestGetTodos,
+    useRequestSearchTitle,
+    useRequestUpdateTodo
 } from "./hooks/index.js";
 
 
@@ -16,10 +16,10 @@ export const App = function () {
     const [refresh, setRefresh] = useState(false)
     const [todos, setTodos] = useState([])
 
-    const {searchHandler, filteredAndSorted, searchTitle, sortState, sortTodos} = useRequestSearchTitle( todos )
+    const {searchHandler, filteredAndSorted, searchTitle, sortState, sortTodos} = useRequestSearchTitle(todos)
     const {addTodo, newTodo, setTodo} = useRequestAddTodo(urlTodos, setRefresh, refresh)
-    const { loading} = useRequestGetTodos(todos, setTodos, urlTodos, refresh);
-    const { deleteTodo } = useRequestDeleteTodo( urlTodos, setRefresh, refresh);
+    const {loading} = useRequestGetTodos(todos, setTodos, urlTodos, refresh);
+    const {deleteTodo} = useRequestDeleteTodo(urlTodos, setRefresh, refresh);
     const {updateTodos} = useRequestUpdateTodo(urlTodos, setRefresh, refresh);
 
     return (<>
@@ -34,16 +34,16 @@ export const App = function () {
             <input type="text"
                    className={styles.addTodo}
                    placeholder="Add Todo"
-                    value={newTodo}
+                   value={newTodo}
                    onChange={setTodo}
             />
             {loading ? <div className={styles.loader}></div> : filteredAndSorted.length === 0 ?
                 <div className={styles.wrong}>Todos not found</div> : <ul>
-                    {filteredAndSorted.map((todo) => (<div key={todo.id} className={styles.flex}>
-                        <li key={todo.id}>{todo.title}</li>
+                    {Object.entries(filteredAndSorted).map(([id, { title }]) => (<div key={id} className={styles.flex}>
+                        <li key={id}>{title}</li>
                         <button
                             className={styles.btn}
-                            onClick={() => updateTodos(todo.id)}
+                            onClick={() => updateTodos(id)}
                         >Update
                         </button>
                         <button
