@@ -1,25 +1,22 @@
 import {useState} from "react";
+import { ref, push } from 'firebase/database'
+import {db} from '../firebase.js'
 
-
-export const useRequestAddTodo = (urlTodos, setRefresh, refresh) => {
+export const useRequestAddTodo = () => {
     const [newTodo, setNewTodo] = useState('')
 
     const setTodo = (e) => {
         setNewTodo(e.target.value)
     }
+
     const addTodo = () => {
         if  (!newTodo.trim()) return
-        fetch(urlTodos, {
-            method: 'POST',
-            headers: {'Content-type': 'application/json'},
-            body: JSON.stringify({
-                "title": newTodo,
-            })
+        const todosDbRef = ref(db, 'todos')
+        push(todosDbRef, {
+            title: newTodo
         })
-            .then(todo => todo.json())
             .then(todo => {
                 console.log(todo)
-                setRefresh(!refresh)
                 setNewTodo('')
             })
             .catch(err => {

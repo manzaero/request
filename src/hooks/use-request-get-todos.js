@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {ref, onValue} from 'firebase/database'
 import {db} from "../firebase.js";
 
-export const useRequestGetTodos = (todos, setTodos, urlTodos, refresh) => {
+export const useRequestGetTodos = (todos, setTodos) => {
 
     const [loading, setLoading] = useState(true)
 

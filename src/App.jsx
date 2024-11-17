@@ -18,7 +18,7 @@ export const App = function () {
 
     const {searchHandler, filteredAndSorted, searchTitle, sortState, sortTodos} = useRequestSearchTitle(todos)
     const {addTodo, newTodo, setTodo} = useRequestAddTodo(urlTodos, setRefresh, refresh)
-    const {loading} = useRequestGetTodos(todos, setTodos, urlTodos, refresh);
+    const {loading} = useRequestGetTodos(todos, setTodos);
     const {deleteTodo} = useRequestDeleteTodo(urlTodos, setRefresh, refresh);
     const {updateTodos} = useRequestUpdateTodo(urlTodos, setRefresh, refresh);
 
@@ -43,12 +43,12 @@ export const App = function () {
                         <li key={id}>{title}</li>
                         <button
                             className={styles.btn}
-                            onClick={() => updateTodos(todo.id)}
+                            onClick={() => updateTodos(id)}
                         >Update
                         </button>
                         <button
                             className={styles.btn}
-                            onClick={() => deleteTodo(todo.id)}
+                            onClick={() => deleteTodo(id)}
                         >Delete
                         </button>
                     </div>))}
